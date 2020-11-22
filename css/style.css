@@ -58,3 +58,6 @@ footer.page-footer {
 .background1{
   min-height: 600px;
 }
+.input-field .prefix.active {
+  color: rgba(165, 42, 42, 0.589);
+}
