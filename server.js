@@ -14,27 +14,56 @@ app.get("/", function (req, res) {
 });
 app.get("/leaderboard", function (req, res) {
     db.Leaderboard.findAll({})
-      .then(function(dbPost) {
-        res.json(dbPost);
-      });
+        .then(function (dbPost) {
+            res.json(dbPost);
+        });
 });
 app.get("/shoot/:playerName/:play", function (req, res) {
-    let player = req.params.playerName;
     let play = req.params.play;
     let result = rps.game(play);
-    if (leaderBoard.includes(player)) {
-        let scoreObject = leaderBoard[player];
-        for (let score in result) {
-            if (result[score] === 1) {
-                scoreObject[score] + 1;
-            }
+    db.Leaderboard.findOne({
+        where: {
+            player: req.params.playerName
         }
-    } else {
-        leaderBoard.push(player);
-        leaderBoard[player] = result;
-    }
+    })
+        .then(function (dbPost) {
+            if (!dbPost) {
+                db.Leaderboard.create({
+                    player: req.params.playerName,
+                    wins: result.wins,
+                    losses: result.losses,
+                    ties: result.ties
+                })
+                    .then(function (dbPost) {
+                        return res.json(dbPost);
+                    });
+            } else {
+            db.Leaderboard.increment({
+                wins: result.wins,
+                losses: result.losses,
+                ties: result.ties
+            },
+                {
+                    where: {
+                        player: req.params.playerName
+                    }
+                })
+                .then(
+                    
+                    db.Leaderboard.findOne({
+                    where: {
+                        player: req.params.playerName
+                    }
+                })
+                    .then(function (dbPost) {
 
-    return res.json(leaderBoard[player]);
+                    return res.json(dbPost);
+                
+                }))
+            
+            }
+        
+});
 });
 db.sequelize.sync({ force: false }).then(function () {
     app.listen(PORT, function () {
