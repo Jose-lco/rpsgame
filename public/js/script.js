@@ -10,7 +10,7 @@
       e.preventDefault()
       let playerName = $('input').val();
       let play = $(this).val();
-      $.get("/shoot" + playerName + play, function(data){
+      $.get("/shoot/" + playerName + "/" + play, function(data){
         console.log(data);
       })
     })
