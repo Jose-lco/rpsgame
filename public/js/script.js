@@ -4,7 +4,19 @@
     $('.sidenav').sidenav();
     $('.parallax').parallax();
     $('.scrollspy').scrollSpy();
-
+    $.get("leaderboard", function(data){
+      console.log(data)
+      let html;
+      data.forEach(res => {
+        html += `<tr>
+        <td>${res.player}</td>
+        <td>${res.wins}</td>
+        <td>${res.losses}</td>
+        <td>${res.ties}</td>
+      </tr>`
+      })
+      $('tbody').html(html);
+    })
 
     $('button').on('click', function(e){
       e.preventDefault()
