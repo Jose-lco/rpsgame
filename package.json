@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "12.9.1",
+    "npm": "6.14.8"
+  },
   "scripts": {
     "test": "jest --coverage",
     "start": "npx nodemon server.js"
