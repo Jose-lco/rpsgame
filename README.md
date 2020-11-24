@@ -29,23 +29,7 @@
 
 ## Installation
 
-1. The first step would be to clone the link of the repository. This can be done by clicking the green button on the top right of this repository.
-![Clone the repository](./672C1BBD-7724-43D3-8E25-5BF73B2D068E_1_105_c.jpeg)
-
-2. Go to your terminal on your computer and run this command in the folder that you would like to generate the README.
-```bash
-git clone https://github.com/Jose-lco/rpsgame.git
-```
-3. Open the folder with the repository. The first thing you would do is to install the dependencies. In order to do this, you would run npm install in the command line.
-```
-npm install 
-``` 
-4. To officially run the application, run this in the command line:
-```bash
-npm start
-```
-5. The information in the /config/config.json will need to be added to your MYSQL workbench inorder to have access to the database. 
-    ### This app will be deployed to Heroku once I fix some bugs
+This app has been deployed to Heroku: [RPS Game](https://rpsgame01.herokuapp.com/)
 
 ## Usage
 
